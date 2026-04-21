@@ -2,24 +2,35 @@
 
 You need to finish following 6 exercises
 
-Configuration:
-- RED - D15
-- Green - D4
-- Blue - D22
-- Yellow - D23
-- button - D14
-- light sensor - D33
+### Setup Configuration in this Wokwi Project template:
 
+- RED LED - `D26`
+- Green LED - `D27`
+- Blue LED - `D14`
+- Yellow LED - `D12`
+
+
+- Button (Active high) - `D25`
+- Light sensor (analog) - `D33`
+
+- LCD I2C - SDA: `D21`
+- LCD I2C - SCL: `D22`
+
+- Servo Motor: `D5`
+
+- Buzzer: `D32`
+
+![alt text](image.png)
 
 
 ## 1) Blink RED LED
-- Turn **RED (D15)** ON for 500 ms, then OFF for 500 ms in a loop.  
+- Turn **RED (D26)** ON for 500 ms, then OFF for 500 ms in a loop.  
 - Serial: Print `RED ON` / `RED OFF` whenever it changes.
 
 ---
 
 ## 2) Button toggles GREEN
-- Press **BUTTON (D14)** to toggle **GREEN (D4)**.  
+- Press **BUTTON (D25)** to toggle **GREEN (D27)**.  
 - Serial: Print `GREEN=1` or `GREEN=0` only when the state changes.
 
 ---
@@ -32,24 +43,24 @@ Configuration:
 
 ## 4) Light sensor -> LED band
 - Read **LIGHT (D33)** and turn ON exactly one LED based on value (0–4095):  
-  - 0–1023 → **BLUE (D22)**  
-  - 1024–2047 → **GREEN (D4)**  
-  - 2048–3071 → **YELLOW (D23)**  
-  - 3072–4095 → **RED (D15)**  
+  - 0–1023 → **BLUE (D14)**  
+  - 1024–2047 → **GREEN (D27)**  
+  - 2048–3071 → **YELLOW (D12)**  
+  - 3072–4095 → **RED (D26)**  
 - Serial: Print `band=BLUE/GREEN/YELLOW/RED`.
 
 ---
 
 ## 5) Snapshot on button
-- Do nothing until **BUTTON (D14)** is pressed.  
+- Do nothing until **BUTTON (D25)** is pressed.  
 - On press, read **LIGHT (D33)** once and print `snapshot=xxxx`.  
-- Flash **YELLOW (D23)** for 100 ms to acknowledge (change 100ms if needed)
+- Flash **YELLOW (D12)** for 100 ms to acknowledge (change 100ms if needed)
 
 ---
 
 ## 6) Minimal serial control
 - If serial receives a character:  
-  - `'B'` → turn **BLUE (D22)** ON  
-  - `'b'` → turn **BLUE (D22)** OFF  
+  - `'B'` → turn **BLUE (D14)** ON  
+  - `'b'` → turn **BLUE (D14)** OFF  
 - Serial: Print `BLUE=1` or `BLUE=0` after each command.
 
