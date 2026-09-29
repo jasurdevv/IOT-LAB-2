@@ -1,4 +1,4 @@
-# IoT 2025 - Lab 1 Template
+# IoT 2026 - Lab 2 Template
 
 You need to finish following 6 exercises
 
