@@ -1,25 +1,52 @@
-
-
-
 #include "Arduino.h"
 
-#define RED_LED_PIN 26
-
-/****************************************************/
-void setup(void) 
+struct ChaseStep
 {
-    pinMode(RED_LED_PIN, OUTPUT); // RED LED
+    uint8_t pin;
+    const char *name;
+};
+
+const ChaseStep chaseSteps[] = {
+    {26, "RED"},
+    {27, "GREEN"},
+    {12, "YELLOW"},
+    {14, "BLUE"},
+    {12, "YELLOW"},
+    {27, "GREEN"},
+};
+const uint8_t CHASE_STEP_COUNT = sizeof(chaseSteps) / sizeof(chaseSteps[0]);
+const unsigned long CHASE_DELAY_MS = 150;
+uint8_t currentStep = 0;
+
+static void turnAllLedsOff(void)
+{
+    for (const ChaseStep &step : chaseSteps)
+    {
+        digitalWrite(step.pin, LOW);
+    }
 }
 
+/****************************************************/
+void setup(void)
+{
+    Serial.begin(115200);
+    for (const ChaseStep &step : chaseSteps)
+    {
+        pinMode(step.pin, OUTPUT);
+    }
+    turnAllLedsOff();
+}
 
 /****************************************************/
-void loop(void) 
+void loop(void)
 {
-    digitalWrite(RED_LED_PIN, HIGH); // Turn RED ON
-    Serial.println("RED ON");
-    delay(1000); // Wait for 1000 ms
+    const ChaseStep &step = chaseSteps[currentStep];
 
-    digitalWrite(RED_LED_PIN, LOW); // Turn RED OFF
-    Serial.println("RED OFF");
-    delay(1000); // Wait for 1000 ms
+    turnAllLedsOff();
+    digitalWrite(step.pin, HIGH);
+    Serial.print("chase=");
+    Serial.println(step.name);
+    delay(CHASE_DELAY_MS);
+
+    currentStep = (currentStep + 1) % CHASE_STEP_COUNT;
 }
